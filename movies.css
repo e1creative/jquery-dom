@@ -1,0 +1,10 @@
+.movie-form {
+    margin-bottom: 1.5rem;
+}
+
+.ratings {
+    width: 500px;
+    border-collapse: collapse;
+}
+
+th, td { padding: .5rem 1rem; border: 1px dotted #000; text-align: left; }

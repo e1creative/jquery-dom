@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App</title>
+
+    <link rel="stylesheet" href="movies.css">
+</head>
+<body>
+    <h1>Movie Names & Ratings</h1>
+    <form id="movie-form" class="movie-form">
+        <h2>Add a new movie and rating!</h2>
+        <input type="text" id="title" placeholder="Movie Title"/>
+        <input type="number" id="rating" min="0" max="10" placeholder="Rating">
+        <button type="submit" id="remove">Submit</button>
+    </form>
+    <div class="ratings-container">
+        <table id="ratings" class="ratings">
+            <thead>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Click to Remove</th>
+            </thead>
+        </table>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        // jquery here
+        $(document).ready(function(){
+            $ratingsTable = $("#ratings")
+            $title = $("#title")
+            $rating = $("#rating")
+
+            function addMovie(e) {
+                e.preventDefault()
+
+                // if values are empty do nothing
+                if ( $title.val() === "" || $rating.val() === "" ) {
+                    return
+                }
+
+                // get our values
+                let movieTitle = $("<td>").text($title.val())
+                let movieRating = $("<td>").text($rating.val())
+                let removeField = $("<td>").append("<button class='remove'>Remove</button>")
+
+                // create our row with our elements and append to the table
+                let row = $("<tr>")
+                row.append(movieTitle)
+                row.append(movieRating)
+                row.append(removeField)
+                $ratingsTable.append(row)
+
+                // clear the inputs
+                $title.val("")
+                $rating.val("")
+            }
+
+            function removeMovie(e){
+                console.log("remove button was clicked")
+                console.log($(this))
+            }
+            $("#movie-form").on("submit", addMovie)
+
+            $ratingsTable.on("click", ".remove", function() { $(this).parent().parent().remove() })
+        })
+    </script>
+</body>
+</html>
